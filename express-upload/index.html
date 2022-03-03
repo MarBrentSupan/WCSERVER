@@ -1,0 +1,37 @@
+<!--Mar Brent Supan
+    2075 - WCSERVER
+    App Name: Upload File
+    Description: html for upload file   -->
+
+<html>
+    <head>
+        <title>File upload demo in Node.js</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#uploadForm').submit(function(){
+                    $("#status").empty().text("File is uploading...");
+
+                    $(this).ajaxSubmit({error: function(xhr){
+                        status("Error: " +xhr.status);
+                    },
+                        success: function(response){
+                            console.log(response)
+                            $("#status").empty().text(response);
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Using Express.js to Demonstrate File Upload</h1>
+        <form action="/uploaded" id="uploadForm" enctype="multipart/form-data" method="post">
+            <input type="file" name="myfile" multiple/><br/><br/>
+            <input type="submit" name="submit" value="Upload Image"><br/><br/>
+            <span id="status"></span>
+        </form>
+    </body>
+</html> 
